@@ -1,9 +1,6 @@
 package com.skypro.book.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -16,6 +13,10 @@ public class Book {
 
     private String name;
     private String author;
+
+    @ManyToOne
+    @JoinColumn(name = "reader_id")
+    private Reader reader;
 
     @Override
     public String toString() {

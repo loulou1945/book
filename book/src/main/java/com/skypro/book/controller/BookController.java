@@ -27,7 +27,18 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Book>> getAllBooks() {
+    public ResponseEntity findBooks(@RequestParam(required = false) String name,
+                                    @RequestParam(required = false) String author,
+                                    @RequestParam(required = false) String namePart) {
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(bookService.findByName(name));
+        }
+        if (author != null && !author.isBlank()) {
+            return ResponseEntity.ok(bookService.findByAuthor(author));
+        }
+        if (namePart != null && !namePart.isBlank()) {
+            return ResponseEntity.ok(bookService.findByNamePart(namePart));
+        }
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
